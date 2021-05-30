@@ -39,4 +39,9 @@ public class UserController {
         // ResponseEntity.created는 201 status code와 함께 전달된다.
         return ResponseEntity.created(location).build();
     }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Integer id) {
+        return ResponseEntity.ok(service.delete(id));
+    }
 }
