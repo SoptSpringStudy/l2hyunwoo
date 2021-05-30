@@ -1,12 +1,15 @@
 package kr.co.marubook.javaspringboot.user;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.NoSuchElementException;
 
 // 비즈니스 로직은 Service에서 작업
 // 인 메모리 데이터들을 다룸
+@Service
 public class UserService {
     public static List<User> userList = new ArrayList<>();
 
@@ -26,13 +29,13 @@ public class UserService {
         if (isUserExistOf(id))
             return userList.stream()
                     .filter(user -> user.getId().equals(id))
-                    .findAny().get();
-
+                    .findAny()
+                    .orElse(null);
         return null;
     }
 
     public User save(User user) {
-        if(user.getId() == null) {
+        if (user.getId() == null) {
             user.setId(++userCount);
         }
         userList.add(user);
