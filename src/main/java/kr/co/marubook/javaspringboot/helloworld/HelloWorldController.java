@@ -9,4 +9,9 @@ public class HelloWorldController {
     public String getHelloWorldString() {
         return "HelloWorld";
     }
+
+    @GetMapping(path = "/hello-world-bean")
+    public HelloWorldDto getHelloWorldDto() {
+        return new HelloWorldDto("Hello World");
+    }
 }
