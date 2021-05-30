@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User retrieveUser(@PathVariable Integer id) {
+    public User retrieveUser(@PathVariable Integer id) throws UserNotFoundException {
         return service.fetchUser(id);
     }
 

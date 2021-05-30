@@ -25,13 +25,13 @@ public class UserService {
         return userList;
     }
 
-    public User fetchUser(Integer id) {
+    public User fetchUser(Integer id) throws UserNotFoundException {
         if (isUserExistOf(id))
             return userList.stream()
                     .filter(user -> user.getId().equals(id))
                     .findAny()
-                    .orElse(null);
-        return null;
+                    .orElseThrow(() -> new UserNotFoundException(String.format("ID[%s] not found", id)));
+        throw new UserNotFoundException(String.format("ID[%s] not found", id));
     }
 
     public User save(User user) {
