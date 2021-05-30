@@ -42,6 +42,15 @@ public class UserService {
         return user;
     }
 
+    public User delete(Integer id) {
+        if (isUserExistOf(id)) {
+            User deleteUser = fetchUser(id);
+            userList.removeIf(user -> user.getId().equals(id));
+            return deleteUser;
+        }
+        throw new UserNotFoundException(String.format("ID[%s] not found", id));
+    }
+
     private boolean isUserExistOf(Integer id) {
         for (User user : userList) {
             if (user.getId().equals(id))
